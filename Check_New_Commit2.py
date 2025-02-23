@@ -29,13 +29,24 @@ def load_last_commit():
             return file.read().strip()
     return None
 
-def run_bash_script(script_name):
-    #Runs the specified Bash script.
+def run_bash_script(script_path):
+    #Runs the specified Bash script with error handling
+    if not os.path.exists(script_path):
+        print(f"Error: Script {script_path} not found.")
+        return
+    
     try:
-        subprocess.run(["bash", script_name], check=True)
-        print(f"Bash script {script_name} executed successfully.")
+        result = subprocess.run(
+            ["bash", script_path],
+            capture_output=True,  # Captures stdout and stderr
+            text=True,
+            check=True
+        )
+        print(f"Bash script {script_path} executed successfully.")
+        print("Output:\n", result.stdout)  # Print script output
     except subprocess.CalledProcessError as e:
-        print(f"Error executing script {script_name}: {e}")
+        print(f"Error executing script {script_path}: {e}")
+        print("Script Error Output:\n", e.stderr)  # Print error details
 
 def save_last_commit(new_commit):
     #Saves the latest commit to a file.
