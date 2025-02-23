@@ -5,7 +5,7 @@ import os
 GITHUB_REPO = "git@github.com:vjghoslya/ci-cd-pileline-tool.git"  # Repository with SSH
 BRANCH = "main"  # Branch to monitor
 LAST_COMMIT_FILE = "last_commit.txt" #Save and check for new and last commits
-BASH_SCRIPT_TO_DEPLOY_CODE = "./Deploy.sh"
+BASH_SCRIPT_TO_DEPLOY_CODE = "/var/www/html/Deploy.sh"
 
 def get_latest_commit():
     #Fetches the latest commit 
